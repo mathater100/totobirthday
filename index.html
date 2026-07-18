@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Toto!</title>
+    <style>
+        :root {
+            --primary: #ff6b00; /* Basketball Orange */
+            --secondary: #00e5ff; /* Aura Cyan */
+            --bg-dark: #0a0a0c;
+            --card-bg: #141417;
+            --text: #ffffff;
+            --text-muted: #a0a0ab;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(255, 107, 0, 0.15) 0%, transparent 70%);
+        }
+
+        .badge {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .nickname {
+            font-size: 5rem;
+            background: linear-gradient(to right, var(--primary), #ffa200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            display: block;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid #27272a;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* Interactive Section */
+        .hype-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(20, 20, 23, 0.6), transparent);
+        }
+
+        .hype-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .hype-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--secondary);
+            background: var(--secondary);
+            color: #000;
+        }
+
+        .counter-text {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        #auraCount {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Confetti Effect Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .nickname { font-size: 3.5rem; }
+            .tagline { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <header>
+        <div class="badge">Happy Birthday • July 19</div>
+        <h1>To The Absolute Legend</h1>
+        <span class="nickname">TOTO</span>
+        <p class="tagline">
+            The sharpest shooter on the basketball court, the unstoppable force on the football field, a brilliant student, and the truest friend anyone could ask for. Life is never boring with you around!
+        </p>
+    </header>
+
+    <main>
+        <section class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">🏀</div>
+                <h3>Basketball</h3>
+                <p>School's #1 Player</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚽</div>
+                <h3>Football</h3>
+                <p>Midfield Maestro</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <h3>Academics</h3>
+                <p>Top Tier Scholar</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✨</div>
+                <h3>Personality</h3>
+                <p>100% Kind & Helpful</p>
+            </div>
+        </section>
+
+        <section class="hype-section">
+            <button class="hype-btn" onclick="increaseAura()">Hype Up Toto's Aura!</button>
+            <p class="counter-text">Toto's Current Aura Level: <span id="auraCount">999,999</span></p>
+        </section>
+    </main>
+
+    <script>
+        // Aura Counter Logic
+        let currentAura = 999999;
+        function increaseAura() {
+            currentAura += 5000;
+            document.getElementById('auraCount').innerText = currentAura.toLocaleString();
+            createBurst();
+        }
+
+        // Lightweight Confetti / Sparkle Engine
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor(x, y, isBurst = false) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 6 + 4;
+                
+                if (isBurst) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 8 + 4;
+                    this.speedX = Math.cos(angle) * speed;
+                    this.speedY = Math.sin(angle) * speed;
+                } else {
+                    this.speedX = Math.random() * 3 - 1.5;
+                    this.speedY = Math.random() * -3 - 2;
+                }
+                
+                const colors = ['#ff6b00', '#00e5ff', '#ffa200', '#ffffff'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.1; // gravity
+                this.alpha -= this.decay;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createBurst() {
+            const x = window.innerWidth / 2;
+            const y = window.innerHeight / 2;
+            for (let i = 0; i < 40; i++) {
+                particles.push(new Particle(x, y, true));
+            }
+        }
+
+        // Auto-spawn ambient celebrations on load
+        setInterval(() => {
+            if (particles.length < 50) {
+                particles.push(new Particle(Math.random() * canvas.width, canvas.height + 10));
+            }
+        }, 100);
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles = particles.filter(p => p.alpha > 0);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
