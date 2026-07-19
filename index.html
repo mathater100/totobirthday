@@ -3,509 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Toto - The Man, The Myth, The Legend</title>
-    
-    <!-- Tailwind CSS for modern, slick layout -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for sport icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <title>Happy Birthday, Toto!</title>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0e12;
-            overflow-x: hidden;
-        }
-        .font-bungee {
-            font-family: 'Bungee', cursive;
-        }
-        /* Custom neon glowing animations */
-        .aura-glow {
-            text-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 40px rgba(168, 85, 247, 0.4);
-            animation: pulse-aura 3s infinite alternate;
-        }
-        @keyframes pulse-aura {
-            0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)); }
-            100% { transform: scale(1.02); filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.9)); }
-        }
-        /* Plant Growth Animation Styles */
-        .pot {
-            width: 80px;
-            height: 60px;
-            background: #7c2d12;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            position: relative;
-        }
-        .pot::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -5px;
-            width: 90px; height: 10px;
-            background: #9a3412;
-            border-radius: 4px;
-        }
-        .stem {
-            width: 8px;
-            height: 0px;
-            background: #22c55e;
-            position: absolute;
-            bottom: 60px;
-            left: 36px;
-            border-radius: 4px;
-            transition: height 3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .leaf {
-            width: 30px;
-            height: 20px;
-            background: #4ade80;
-            border-radius: 0 100% 0 100%;
-            position: absolute;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 1s ease-in-out;
-        }
-        .leaf.left {
-            left: -24px;
-            transform-origin: right bottom;
-        }
-        .leaf.right {
-            right: -24px;
-            transform-radius: 100% 0 100% 0;
-            border-radius: 100% 0 100% 0;
-            transform-origin: left bottom;
-        }
-        .flower {
-            width: 40px;
-            height: 40px;
-            background: #facc15;
-            border-radius: 50%;
-            position: absolute;
-            top: -35px;
-            left: -16px;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: bold;
-            color: #000;
-            box-shadow: 0 0 20px #facc15;
-        }
-        /* Floating Sport Balls Animation */
-        .floating-ball {
-            position: absolute;
-            animation: float-around 6s infinite ease-in-out alternate;
-            opacity: 0.15;
-            z-index: 0;
-        }
-        @keyframes float-around {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-30px) rotate(360deg); }
+        :root {
+            --primary: #ff6b00; /* Basketball Orange */
+            --secondary: #00e5ff; /* Aura Cyan */
+            --bg-dark: #0a0a0c;
+            --card-bg: #141417;
+            --text: #ffffff;
+            --text-muted: #a0a0ab;
         }
 
-        /* Game Specific Styles */
-        .game-canvas-container {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
             position: relative;
+            background: radial-gradient(circle at center, rgba(255, 107, 0, 0.15) 0%, transparent 70%);
+        }
+
+        .badge {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .nickname {
+            font-size: 5rem;
+            background: linear-gradient(to right, var(--primary), #ffa200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            display: block;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
             width: 100%;
-            height: 200px;
-            background-color: #1e293b;
-            border-radius: 12px;
-            overflow: hidden;
+            max-width: 900px;
+            padding: 2rem;
+            margin: 0 auto;
         }
-        #gameBall {
-            position: absolute;
-            transition: all 0.1s ease-out;
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid #27272a;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        #gameTarget {
-            position: absolute;
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
         }
-        .net-rim {
-            border-top: 4px solid #ef4444;
-            border-left: 2px solid transparent;
-            border-right: 2px solid transparent;
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* Interactive Section */
+        .hype-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(20, 20, 23, 0.6), transparent);
+        }
+
+        .hype-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .hype-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--secondary);
+            background: var(--secondary);
+            color: #000;
+        }
+
+        .counter-text {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        #auraCount {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Confetti Effect Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .nickname { font-size: 3.5rem; }
+            .tagline { font-size: 1rem; }
         }
     </style>
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Ambient Floating Background Objects for Sport Multi-Talent Theme -->
-    <i class="fa-solid fa-basketball floating-ball text-orange-500 text-6xl top-20 left-10" style="animation-delay: 0s;"></i>
-    <i class="fa-solid fa-regular fa-futbol floating-ball text-white text-7xl top-1/3 right-12" style="animation-delay: 1.5s;"></i>
-    <i class="fa-solid fa-volleyball floating-ball text-yellow-400 text-6xl bottom-24 left-16" style="animation-delay: 3s;"></i>
+    <canvas id="confetti-canvas"></canvas>
 
-    <!-- Header / Hero Section -->
-    <header class="container mx-auto px-4 pt-12 pb-6 text-center z-10">
-        <div class="inline-block bg-purple-900/40 border border-purple-500/30 px-4 py-1.5 rounded-full text-purple-300 text-xs font-semibold uppercase tracking-widest mb-4">
-            🚨 Warning: Extreme Levels of Aura Ahead 🚨
-        </div>
-        <h1 class="text-5xl md:text-7xl font-bungee tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400 main-title">
-            HAPPY BIRTHDAY, TOTO!
-        </h1>
-        <p class="mt-4 text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto font-medium">
-            Formally known as <span class="text-slate-200 underline decoration-indigo-500 decoration-2">Toyesh</span>, but universally recognized as the absolute GOAT.
+    <header>
+        <div class="badge">Happy Birthday • July 19</div>
+        <h1>To The Absolute Legend</h1>
+        <span class="nickname">TOTO</span>
+        <p class="tagline">
+            The sharpest shooter on the basketball court, the unstoppable force on the football field, a brilliant student, and the truest friend anyone could ask for. Life is never boring with you around!
         </p>
     </header>
 
-    <!-- Main Content Grid -->
-    <main class="container mx-auto px-4 py-6 max-w-5xl z-10 flex-grow grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <!-- Left Card: The Omnipresent Aura Status -->
-        <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 p-6 rounded-2xl flex flex-col justify-between items-center text-center group hover:border-purple-500/50 transition-all duration-300">
-            <div>
-                <div class="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center text-purple-400 text-3xl mb-4 mx-auto">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </div>
-                <h3 class="text-xl font-bold text-slate-200 mb-2">Verified Aura Status</h3>
-                <p class="text-slate-400 text-sm">Scientists tried to calculate his impact, but the scale shattered.</p>
+    <main>
+        <section class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">🏀</div>
+                <h3>Basketball</h3>
+                <p>School's #1 Player</p>
             </div>
-            <div class="my-6">
-                <div class="text-6xl font-bungee text-purple-400 aura-glow select-none">&infin;</div>
-                <span class="text-xs font-bold text-purple-300 tracking-widest uppercase block mt-2">Current Aura Score</span>
+            <div class="stat-card">
+                <div class="stat-icon">⚽</div>
+                <h3>Football</h3>
+                <p>Midfield Maestro</p>
             </div>
-            <div class="w-full bg-slate-800/80 rounded-xl p-3 text-xs text-left text-slate-400 border border-slate-700/50">
-                <span class="font-bold text-slate-200">Passive Effects:</span> Automatically dominates every room he walks into, outstandingly smooth gameplay, flawless exams.
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <h3>Academics</h3>
+                <p>Top Tier Scholar</p>
             </div>
-        </div>
+            <div class="stat-card">
+                <div class="stat-icon">✨</div>
+                <h3>Personality</h3>
+                <p>100% Kind & Helpful</p>
+            </div>
+        </section>
 
-        <!-- Middle Card: Interactive Toto-Synthesis Join Section -->
-        <div class="bg-gradient-to-b from-slate-900/90 to-slate-950/90 backdrop-blur-md border-2 border-green-500/40 p-6 rounded-2xl flex flex-col items-center justify-between text-center shadow-lg shadow-green-950/20">
-            <div>
-                <div class="inline-block bg-green-500/10 border border-green-500/30 px-3 py-1 rounded-full text-green-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                    Exclusive Club Invitation
-                </div>
-                <h3 class="text-2xl font-bungee text-slate-100 tracking-wide">Toto-Synthesis</h3>
-                <p class="text-slate-400 text-xs mt-1 px-4">
-                    The revolutionary process of converting pure athletic skill, sharp brains, and birthday vibes into unadulterated energy.
-                </p>
-            </div>
-
-            <!-- Interactive Animation Window -->
-            <div class="my-8 h-48 w-full flex flex-col items-center justify-end relative">
-                <!-- The Plant Structure -->
-                <div class="pot shadow-lg">
-                    <div id="plantStem" class="stem">
-                        <div id="leaf1" class="leaf left" style="bottom: 20px;"></div>
-                        <div id="leaf2" class="leaf right" style="bottom: 40px;"></div>
-                        <div id="leaf3" class="leaf left" style="bottom: 60px;"></div>
-                        <div id="leaf4" class="leaf right" style="bottom: 80px;"></div>
-                        <div id="flowerHead" class="flower">👑 TOTO</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Action Trigger Button -->
-            <div class="w-full">
-                <button id="synthesisBtn" onclick="triggerTotoSynthesis()" class="w-full py-3 px-6 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-md shadow-green-500/20 transform active:scale-95 tracking-wide text-sm">
-                    🚀 CLICK TO INITIATE TOTO-SYNTHESIS
-                </button>
-                <p id="synthesisStatus" class="text-xs text-slate-500 mt-2 italic h-4">Click the button to generate ultimate energy...</p>
-            </div>
-        </div>
-
-        <!-- Right Card: The Polymath / Multi-Sport God Stats -->
-        <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 p-6 rounded-2xl flex flex-col justify-between group hover:border-amber-500/50 transition-all duration-300">
-            <div>
-                <div class="w-16 h-16 bg-amber-500/10 rounded-full flex items-center justify-center text-amber-400 text-3xl mb-4 mx-auto">
-                    <i class="fa-solid fa-trophy"></i>
-                </div>
-                <h3 class="text-xl font-bold text-slate-200 text-center mb-1">Unfair Skill Distribution</h3>
-                <p class="text-slate-400 text-xs text-center mb-4">Bro literally left no talent points for the rest of us.</p>
-                
-                <!-- Skill Bars representing his multi-sport & academic excellence -->
-                <div class="space-y-3.5">
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold mb-1">
-                            <span class="text-slate-300"><i class="fa-solid fa-basketball mr-1.5 text-orange-400"></i> Basketball</span>
-                            <span class="text-amber-400">99/99</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-orange-500 to-amber-400 h-full w-[99%] rounded-full"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold mb-1">
-                            <span class="text-slate-300"><i class="fa-solid fa-regular fa-futbol mr-1.5 text-slate-200"></i> Football</span>
-                            <span class="text-amber-400">98/99</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-slate-300 to-slate-100 h-full w-[98%] rounded-full"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold mb-1">
-                            <span class="text-slate-300"><i class="fa-solid fa-volleyball mr-1.5 text-yellow-400"></i> Volleyball</span>
-                            <span class="text-amber-400">99/99</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-yellow-500 to-amber-300 h-full w-[99%] rounded-full"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold mb-1">
-                            <span class="text-slate-300"><i class="fa-solid fa-book-open mr-1.5 text-emerald-400"></i> Academics & Studies</span>
-                            <span class="text-amber-400">100/99</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-emerald-500 to-green-300 h-full w-full rounded-full"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-4 border-t border-slate-800/80 pt-3 text-center">
-                <span class="text-xs italic text-slate-500">Verdict: Definitively built completely different.</span>
-            </div>
-        </div>
-
+        <section class="hype-section">
+            <button class="hype-btn" onclick="increaseAura()">Hype Up Toto's Aura!</button>
+            <p class="counter-text">Toto's Current Aura Level: <span id="auraCount">999,999</span></p>
+        </section>
     </main>
 
-    <!-- Interactive Mini-Arcade Section (Full Width) -->
-    <section class="container mx-auto px-4 py-6 max-w-5xl z-10 mb-6">
-        <div class="bg-slate-900/80 backdrop-blur-md border border-indigo-500/30 rounded-2xl p-6">
-            <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
-                <div>
-                    <h3 class="text-2xl font-bungee text-indigo-400 tracking-wide">🎮 TOTO'S MINI ARCADE</h3>
-                    <p class="text-xs text-slate-400">Prove your absolute athletic mastery. Time your hits perfectly!</p>
-                </div>
-                <!-- Game Selectors -->
-                <div class="flex bg-slate-800/80 p-1 rounded-xl border border-slate-700">
-                    <button onclick="switchGame('basketball')" id="btn-basketball" class="game-tab-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 text-white transition-all">Basketball</button>
-                    <button onclick="switchGame('football')" id="btn-football" class="game-tab-btn px-3 py-1.5 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all">Football</button>
-                    <button onclick="switchGame('volleyball')" id="btn-volleyball" class="game-tab-btn px-3 py-1.5 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all">Volleyball</button>
-                </div>
-            </div>
-
-            <!-- Arcade Arena -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
-                <div class="md:col-span-3 game-canvas-container flex items-center justify-center">
-                    <!-- The Interactive Dynamic elements managed by JS -->
-                    <div id="gameTarget" class="w-12 h-12 flex items-center justify-center text-2xl"></div>
-                    <div id="gameBall" class="w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-lg cursor-pointer"></div>
-                    
-                    <!-- Aim Guide Bar -->
-                    <!-- <br>
-                    <br>
-                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-950/60 px-3 py-1 rounded-full border border-slate-800 text-[10px] text-slate-400 tracking-wider">
-                        Tap the ball when the target lines up!
-                    </div>
-                </div> -->
-
-                <!-- Live Scoreboard -->
-                <div class="bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-center flex flex-col justify-between h-full min-h-[150px]">
-                    <div>
-                        <span class="text-xs font-bold uppercase text-slate-500 tracking-widest block mb-1">Scoreboard</span>
-                        <div id="gameScore" class="text-5xl font-bungee text-amber-400">0</div>
-                    </div>
-                    <div id="gameFeedback" class="text-xs text-indigo-300 font-semibold animate-pulse mt-2">
-                        Get ready to score!
-                    </div>
-                    <button onclick="resetGameScore()" class="mt-3 text-[10px] text-slate-500 hover:text-slate-300 underline uppercase tracking-wider transition-all">
-                        Reset Highscore
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Quote Section -->
-    <footer class="container mx-auto px-4 py-8 text-center z-10 border-t border-slate-900/60 mt-6 bg-slate-950/40 w-full">
-        <p class="text-sm text-slate-400 tracking-wide font-medium">
-            Made with absolute respect for a truly great friend. Have a phenomenal birthday, Toto! 🎉
-        </p>
-    </footer>
-
-    <!-- Interactive Script Mechanics -->
     <script>
-        let dynamicSynthesisTriggered = false;
-
-        function triggerTotoSynthesis() {
-            if (dynamicSynthesisTriggered) return;
-            dynamicSynthesisTriggered = true;
-
-            const stem = document.getElementById('plantStem');
-            const statusText = document.getElementById('synthesisStatus');
-            const btn = document.getElementById('synthesisBtn');
-            
-            // UI Updates instantly
-            btn.disabled = true;
-            btn.innerHTML = '🌱 COLLECTING SOLAR VIBES...';
-            btn.classList.replace('from-green-500', 'from-slate-700');
-            btn.classList.replace('to-emerald-600', 'to-slate-800');
-            btn.classList.add('text-slate-500', 'cursor-not-allowed');
-            
-            statusText.innerText = "Absorbing brilliance... Process: Toto-synthesis active!";
-            statusText.classList.replace('text-slate-500', 'text-green-400');
-
-            // Phase 1: Stem grows upwards rapidly
-            stem.style.height = '120px';
-
-            // Phase 2: Sequential Leaf Sprouts based on growth intervals
-            setTimeout(() => {
-                const l1 = document.getElementById('leaf1');
-                l1.style.opacity = '1';
-                l1.style.transform = 'scale(1) rotate(-15deg)';
-            }, 800);
-
-            setTimeout(() => {
-                const l2 = document.getElementById('leaf2');
-                l2.style.opacity = '1';
-                l2.style.transform = 'scale(1) rotate(15deg)';
-            }, 1400);
-
-            setTimeout(() => {
-                const l3 = document.getElementById('leaf3');
-                l3.style.opacity = '1';
-                l3.style.transform = 'scale(1) rotate(-25deg)';
-            }, 2000);
-
-            setTimeout(() => {
-                const l4 = document.getElementById('leaf4');
-                l4.style.opacity = '1';
-                l4.style.transform = 'scale(1) rotate(25deg)';
-            }, 2500);
-
-            // Phase 3: Ultimate Crown Flower Blooms at apex
-            setTimeout(() => {
-                const flower = document.getElementById('flowerHead');
-                flower.style.opacity = '1';
-                flower.style.transform = 'scale(1)';
-                statusText.innerText = "✨ Toto-synthesis COMPLETE! Infinite energy achieved.";
-                
-                // Triggers structural screen shake celebration effect
-                document.body.classList.add('animate-ping');
-                setTimeout(() => document.body.classList.remove('animate-ping'), 150);
-            }, 3200);
+        // Aura Counter Logic
+        let currentAura = 999999;
+        function increaseAura() {
+            currentAura += 5000;
+            document.getElementById('auraCount').innerText = currentAura.toLocaleString();
+            createBurst();
         }
 
-        /* Arcade Sports Engine Config */
-        let currentSport = 'basketball';
-        let score = 0;
-        let gameInterval;
-        let targetX = 50;
-        let targetY = 30;
-        let ballX = 50;
-        let ballY = 80;
-        let direction = 1;
-        let speed = 2;
+        // Lightweight Confetti / Sparkle Engine
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
 
-        const ballEl = document.getElementById('gameBall');
-        const targetEl = document.getElementById('gameTarget');
-        const scoreEl = document.getElementById('gameScore');
-        const feedbackEl = document.getElementById('gameFeedback');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        const sportConfigs = {
-            basketball: {
-                ballHtml: '🏀',
-                targetHtml: '<div class="net-rim w-10 h-6 bg-slate-900/40"></div>',
-                bgClass: 'bg-orange-950/20',
-                successMsg: "BOOM! Nothing but net! 🏀",
-                failMsg: "In and out! Try again!"
-            },
-            football: {
-                ballHtml: '⚽',
-                targetHtml: '🥅',
-                bgClass: 'bg-emerald-950/20',
-                successMsg: "GOAL!!! Top bins! ⚽🔥",
-                failMsg: "Hit the crossbar!"
-            },
-            volleyball: {
-                ballHtml: '🏐',
-                targetHtml: '✋',
-                bgClass: 'bg-yellow-950/20',
-                successMsg: "MONSTER SPIKE!!! 🏐💥",
-                failMsg: "Blocked at the net!"
+        class Particle {
+            constructor(x, y, isBurst = false) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 6 + 4;
+                
+                if (isBurst) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 8 + 4;
+                    this.speedX = Math.cos(angle) * speed;
+                    this.speedY = Math.sin(angle) * speed;
+                } else {
+                    this.speedX = Math.random() * 3 - 1.5;
+                    this.speedY = Math.random() * -3 - 2;
+                }
+                
+                const colors = ['#ff6b00', '#00e5ff', '#ffa200', '#ffffff'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
             }
-        };
 
-        function switchGame(sport) {
-            currentSport = sport;
-            
-            // Handle active tab styles
-            document.querySelectorAll('.game-tab-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'text-white');
-                btn.classList.add('text-slate-400');
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.1; // gravity
+                this.alpha -= this.decay;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createBurst() {
+            const x = window.innerWidth / 2;
+            const y = window.innerHeight / 2;
+            for (let i = 0; i < 40; i++) {
+                particles.push(new Particle(x, y, true));
+            }
+        }
+
+        // Auto-spawn ambient celebrations on load
+        setInterval(() => {
+            if (particles.length < 50) {
+                particles.push(new Particle(Math.random() * canvas.width, canvas.height + 10));
+            }
+        }, 100);
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles = particles.filter(p => p.alpha > 0);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
-            document.getElementById(`btn-${sport}`).classList.add('bg-indigo-600', 'text-white');
-            document.getElementById(`btn-${sport}`).classList.remove('text-slate-400');
-
-            // Apply theme configuration variants
-            const container = document.querySelector('.game-canvas-container');
-            container.className = `game-canvas-container flex items-center justify-center ${sportConfigs[sport].bgClass}`;
-            
-            setupGameElements();
+            requestAnimationFrame(animate);
         }
-
-        function setupGameElements() {
-            ballEl.innerHTML = sportConfigs[currentSport].ballHtml;
-            targetEl.innerHTML = sportConfigs[currentSport].targetHtml;
-            
-            // Position structural layouts
-            targetX = 20 + Math.random() * 60; // 20% to 80% range
-            targetY = 20;
-            targetEl.style.left = `${targetX}%`;
-            targetEl.style.top = `${targetY}%`;
-
-            ballY = 75;
-            ballX = 10;
-            ballEl.style.top = `${ballY}%`;
-            ballEl.style.left = `${ballX}%`;
-            
-            speed = 2.5 + (score * 0.4); // Scales complexity cleanly
-            if(speed > 7) speed = 7; 
-        }
-
-        // Main animation tick loop mechanics
-        function runGameTick() {
-            ballX += direction * speed;
-            if (ballX >= 88) {
-                ballX = 88;
-                direction = -1;
-            } else if (ballX <= 5) {
-                ballX = 5;
-                direction = 1;
-            }
-            ballEl.style.left = `${ballX}%`;
-        }
-
-        // Action trigger intercepting target layout coordinate overlap bounds
-        ballEl.addEventListener('click', () => {
-            const deltaX = Math.abs(ballX - targetX);
-            
-            // Check if horizontal alignment matches target alignment window safely
-            if (deltaX < 8) {
-                score++;
-                scoreEl.innerText = score;
-                feedbackEl.innerText = sportConfigs[currentSport].successMsg;
-                feedbackEl.className = "text-xs text-green-400 font-bold animate-bounce";
-                
-                // Flash confirmation UI highlight
-                ballEl.style.transform = 'scale(1.4)';
-                setTimeout(() => { ballEl.style.transform = 'scale(1)'; }, 200);
-            } else {
-                feedbackEl.innerText = sportConfigs[currentSport].failMsg;
-                feedbackEl.className = "text-xs text-rose-400 font-semibold";
-            }
-            
-            setupGameElements();
-        });
-
-        function resetGameScore() {
-            score = 0;
-            scoreEl.innerText = score;
-            feedbackEl.innerText = "Score reset! Show off that signature skill.";
-            feedbackEl.className = "text-xs text-indigo-300 font-semibold";
-            setupGameElements();
-        }
-
-        // Core continuous initialization loops
-        switchGame('basketball');
-        clearInterval(gameInterval);
-        gameInterval = setInterval(runGameTick, 20);
+        animate();
     </script>
 </body>
 </html>
