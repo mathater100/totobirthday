@@ -12,6 +12,7 @@
             --card-bg: #141417;
             --text: #ffffff;
             --text-muted: #a0a0ab;
+            --synthesis-green: #10b981;
         }
 
         * {
@@ -120,6 +121,148 @@
             color: var(--text);
         }
 
+        /* Toto-Synthesis Section */
+        .synthesis-section {
+            max-width: 500px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border: 1px solid #27272a;
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .synthesis-section h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .synthesis-section p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .reactor-vessel {
+            height: 180px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #1f1f23;
+            border-radius: 16px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .stem-container {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 110px;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+
+        .stem-path {
+            width: 4px;
+            height: 0%;
+            background: linear-gradient(0deg, #059669 0%, var(--synthesis-green) 100%);
+            box-shadow: 0 0 10px var(--synthesis-green);
+            transition: height 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .leaf-node {
+            width: 18px;
+            height: 12px;
+            background: var(--synthesis-green);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+            position: absolute;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .leaf-node.left {
+            border-radius: 12px 0 12px 0;
+            left: -18px;
+            transform-origin: right bottom;
+        }
+
+        .leaf-node.right {
+            border-radius: 0 12px 0 12px;
+            right: -18px;
+            transform-origin: left bottom;
+        }
+
+        .flower-crown {
+            width: 36px;
+            height: 36px;
+            background: radial-gradient(circle at center, #fbbf24 0%, #f59e0b 100%);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+            border-radius: 50%;
+            position: absolute;
+            top: -36px;
+            left: -16px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pot-base {
+            width: 48px;
+            height: 30px;
+            background: #1f1f23;
+            border: 1px solid #27272a;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .synthesis-btn {
+            background: transparent;
+            color: var(--synthesis-green);
+            border: 2px solid var(--synthesis-green);
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .synthesis-btn:hover:not(:disabled) {
+            background: var(--synthesis-green);
+            color: #000;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .synthesis-btn:disabled {
+            border-color: #27272a;
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .synthesis-status-text {
+            font-size: 0.8rem;
+            font-family: monospace;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+        }
+
         /* Interactive Section */
         .hype-section {
             text-align: center;
@@ -213,6 +356,30 @@
             </div>
         </section>
 
+        <!-- Dynamic Toto-Synthesis Integration Module -->
+        <section class="synthesis-section">
+            <h2>Toto-synthesis Laboratory</h2>
+            <p>Converting absolute pure talent density into raw organic aura energy.</p>
+            
+            <div class="reactor-vessel">
+                <div class="stem-container">
+                    <div id="plantStem" class="stem-path">
+                        <div id="leaf1" class="leaf-node left" style="bottom: 25px;"></div>
+                        <div id="leaf2" class="leaf-node right" style="bottom: 45px;"></div>
+                        <div id="leaf3" class="leaf-node left" style="bottom: 65px;"></div>
+                        <div id="leaf4" class="leaf-node right" style="bottom: 85px;"></div>
+                        <div id="flowerHead" class="flower-crown">
+                            <span style="font-size: 9px; font-weight: bold; color: #000;">👑 GOAT</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pot-base"></div>
+            </div>
+
+            <button id="synthesisBtn" class="synthesis-btn" onclick="triggerTotoSynthesis()">Initiate Toto-synthesis</button>
+            <div id="synthesisStatus" class="synthesis-status-text">SYSTEM STATUS: IDLE</div>
+        </section>
+
         <section class="hype-section">
             <button class="hype-btn" onclick="increaseAura()">Hype Up Toto's Aura!</button>
             <p class="counter-text">Toto's Current Aura Level: <span id="auraCount">999,999</span></p>
@@ -220,6 +387,41 @@
     </main>
 
     <script>
+        // Toto-Synthesis Growth Engine Logic
+        let synthesisTriggered = false;
+        function triggerTotoSynthesis() {
+            if (synthesisTriggered) return;
+            synthesisTriggered = true;
+
+            const stem = document.getElementById('plantStem');
+            const btn = document.getElementById('synthesisBtn');
+            const statusText = document.getElementById('synthesisStatus');
+
+            btn.disabled = true;
+            btn.innerText = "Synthesis Active...";
+            statusText.innerText = "PROCESS: TOTO-SYNTHESIS RUNNING...";
+            statusText.style.color = "var(--synthesis-green)";
+
+            // Stretch the stem upward flawlessly
+            stem.style.height = '100%';
+
+            // Sprout nodes sequentially 
+            setTimeout(() => { document.getElementById('leaf1').style.opacity = '1'; document.getElementById('leaf1').style.transform = 'scale(1) rotate(-10deg)'; }, 600);
+            setTimeout(() => { document.getElementById('leaf2').style.opacity = '1'; document.getElementById('leaf2').style.transform = 'scale(1) rotate(10deg)'; }, 1100);
+            setTimeout(() => { document.getElementById('leaf3').style.opacity = '1'; document.getElementById('leaf3').style.transform = 'scale(1) rotate(-10deg)'; }, 1600);
+            setTimeout(() => { document.getElementById('leaf4').style.opacity = '1'; document.getElementById('leaf4').style.transform = 'scale(1) rotate(10deg)'; }, 2100);
+
+            // Apex Bloom Completion 
+            setTimeout(() => {
+                const flower = document.getElementById('flowerHead');
+                flower.style.opacity = '1';
+                flower.style.transform = 'scale(1)';
+                statusText.innerText = "SUCCESS: MAX ENERGY OUTPUT ACHIEVED!";
+                statusText.style.color = "#fbbf24";
+                createBurst(); // Spark celebratory burst
+            }, 2600);
+        }
+
         // Aura Counter Logic
         let currentAura = 999999;
         function increaseAura() {
