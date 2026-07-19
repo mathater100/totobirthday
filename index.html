@@ -3,378 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEVEL UP: TOTO'S BIRTHDAY BASH</title>
+    <title>THE TOTO CHRONICLES</title>
     <style>
         :root {
-            --bg: #0b0f19;
-            --panel: #131a2c;
-            --border: #222f4c;
+            --yellow: #ffd60a;
             --orange: #ff6b00;
-            --cyan: #00e5ff;
-            --green: #39ff14;
-            --text: #ffffff;
+            --cyan: #00f5ff;
+            --purple: #7209b7;
+            --bg: #03045e;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Impact', 'Arial Black', sans-serif;
         }
 
         body {
             background-color: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
+            color: #fff;
             padding: 20px;
+            overflow-x: hidden;
+            background: radial-gradient(circle at var(--aura-x, 50%) var(--aura-y, 50%), var(--purple) 0%, var(--bg) 70%);
+            transition: --aura-x 0.5s, --aura-y 0.5s;
         }
 
-        .dashboard {
-            max-width: 1200px;
+        /* Comic Book Grid System */
+        .comic-container {
+            max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
-        /* Neon Header */
-        header {
-            grid-column: span 12;
-            text-align: center;
-            padding: 40px 20px;
-            background: var(--panel);
-            border: 3px solid var(--cyan);
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
-            position: relative;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: var(--orange);
-            text-shadow: 0 0 10px var(--orange);
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--cyan);
-            text-shadow: 0 0 8px var(--cyan);
-        }
-
-        /* Generic Panel Style */
         .panel {
-            background: var(--panel);
-            border: 2px solid var(--border);
-            border-radius: 12px;
+            background: #fff;
+            color: #000;
+            border: 5px solid #000;
+            box-shadow: 8px 8px 0px #000;
             padding: 20px;
             position: relative;
-            overflow: hidden;
+            transform: rotate(calc(var(--rotation, 0deg)));
+            transition: transform 0.2s ease;
         }
 
-        .panel-title {
-            font-size: 1.2rem;
-            color: var(--orange);
-            margin-bottom: 15px;
-            border-bottom: 2px dashed var(--border);
-            padding-bottom: 5px;
+        .panel:hover {
+            transform: scale(1.02) rotate(0deg);
+            z-index: 10;
+        }
+
+        /* Unique Panel Sizes */
+        .hero-panel { grid-column: span 3; --rotation: -1deg; background: var(--yellow); text-align: center;}
+        .stat-panel { grid-column: span 1; --rotation: 1deg; background: var(--cyan); }
+        .game-panel { grid-column: span 2; --rotation: -0.5deg; background: #111; color: #fff;}
+        .soundboard-panel { grid-column: span 3; --rotation: 0.5deg; background: #fff; }
+
+        /* Text Styling */
+        h1 {
+            font-size: 4.5rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            -webkit-text-stroke: 2px #000;
+            color: #fff;
+            text-shadow: 5px 5px 0px var(--orange);
         }
 
-        /* Left Side: Stats & Story */
-        .profile-panel { grid-column: span 4; }
-        @media (max-width: 900px) { .profile-panel { grid-column: span 12; } }
-
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 1.1rem;
-        }
-        .stat-val { color: var(--green); font-weight: bold; }
-
-        /* Center: The Games Arena */
-        .arena-panel { 
-            grid-column: span 5; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between;
-        }
-        @media (max-width: 900px) { .arena-panel { grid-column: span 12; } }
-
-        .game-screen {
+        .comic-title {
+            font-size: 1.8rem;
+            text-transform: uppercase;
             background: #000;
-            height: 200px;
-            border-radius: 8px;
-            border: 2px solid var(--orange);
-            position: relative;
-            overflow: hidden;
+            color: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            transform: skew(-10deg);
             margin-bottom: 15px;
         }
 
-        .game-btn {
+        /* Interactive Canvas */
+        #boredom-canvas {
+            width: 100%;
+            height: 250px;
+            background: #222;
+            border: 3px solid #000;
+            cursor: crosshair;
+        }
+
+        /* Comic Pop Buttons */
+        .pop-btn {
             background: var(--orange);
-            color: #000;
-            border: none;
-            padding: 12px;
-            font-size: 1.1rem;
+            color: #fff;
+            border: 4px solid #000;
+            padding: 10px 20px;
+            font-size: 1.3rem;
             font-weight: bold;
-            cursor: pointer;
-            border-radius: 6px;
-            width: 100%;
             text-transform: uppercase;
-            box-shadow: 0 4px 0 #b34a00;
-            transition: all 0.1s ease;
-        }
-        .game-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 0 0 #000;
-        }
-
-        /* Right Side: Aura Generator & Board */
-        .aura-panel { grid-column: span 3; text-align: center; }
-        @media (max-width: 900px) { .aura-panel { grid-column: span 12; } }
-
-        .big-counter {
-            font-size: 2.5rem;
-            color: var(--cyan);
-            margin: 20px 0;
-            text-shadow: 0 0 10px var(--cyan);
-        }
-
-        .hype-btn {
-            background: var(--cyan);
-            color: #000;
-            box-shadow: 0 4px 0 #00a0b3;
-        }
-
-        /* Quote Soundboard */
-        .soundboard-panel { grid-column: span 12; }
-        .grid-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .sound-btn {
-            background: #1b263b;
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 15px;
-            border-radius: 6px;
+            box-shadow: 4px 4px 0px #000;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        .sound-btn:hover {
-            background: var(--border);
-            border-color: var(--cyan);
+            transition: 0.1s;
+            margin: 5px;
         }
 
-        /* Interactive Entities in game screen */
-        .target-hoop {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            font-size: 2.5rem;
-            transition: transform 0.2s;
+        .pop-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #000;
         }
-        .projectile {
+
+        /* Dialogue Bubble */
+        .bubble {
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 20px;
+            padding: 15px;
+            position: relative;
+            color: #000;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .bubble::after {
+            content: '';
             position: absolute;
-            bottom: 10px;
+            bottom: -15px;
             left: 30px;
-            font-size: 2rem;
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: #fff transparent;
+            display: block;
+            width: 0;
         }
 
-        /* Custom Confetti Canvas overlay */
-        #fx-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
+        .bubble-border::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 28px;
+            border-width: 16px 16px 0;
+            border-style: solid;
+            border-color: #000 transparent;
+            display: block;
+            width: 0;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .comic-container { grid-template-columns: 1fr; }
+            .hero-panel, .stat-panel, .game-panel, .soundboard-panel { grid-column: span 1; }
+            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="fx-canvas"></canvas>
-
-    <div class="dashboard">
-        <!-- Header -->
-        <header>
-            <h1>LEVEL UP: TOYESH BASH v20.26</h1>
-            <div class="subtitle">HAPPY BIRTHDAY TO TOTO! 🏀⚽</div>
-        </header>
-
-        <!-- Left Column: Character Stats -->
-        <div class="panel profile-panel">
-            <div class="panel-title">⚡ Toto's Attribute Matrix</div>
-            <div class="stat-row"><span>BASKETBALL SKILLS:</span><span class="stat-val">MAX LEVEL</span></div>
-            <div class="stat-row"><span>FOOTBALL IQ:</span><span class="stat-val">99 OVERALL</span></div>
-            <div class="stat-row"><span>ACADEMICS/STUDIES:</span><span class="stat-val">GENIUS CLASS</span></div>
-            <div class="stat-row"><span>KINDNESS SCORE:</span><span class="stat-val">∞</span></div>
-            <div class="stat-row"><span>BOREDOM DEFENSE:</span><span class="stat-val">100% IMMUNE</span></div>
-            <br>
-            <div class="panel-title">🏆 Unlocked Achievements</div>
-            <div style="font-size: 0.9rem; line-height: 1.8;">
-                ✅ [UNSTOPPABLE] Best player in the school.<br>
-                ✅ [DUAL THREAT] Mastered both court & field.<br>
-                ✅ [LEGENDARY AURA] Vibe check always flawless.
-            </div>
+    <div class="comic-container">
+        
+        <!-- PANEL 1: THE SPLASH TITLE -->
+        <div class="panel hero-panel">
+            <h1>TOTO: THE LEGEND UNLEASHED!</h1>
+            <p style="font-size: 1.5rem; color: #000; margin-top: 10px;">VOLUME 1 // ISSUE #1 // THE BIRTHDAY EDITION</p>
+            <button class="pop-btn" style="background: var(--purple);" onclick="multiplyAura(event)">💥 CHARGE TOTO'S AURA 💥</button>
         </div>
 
-        <!-- Center Column: Basketball Court Game -->
-        <div class="panel arena-panel">
-            <div>
-                <div class="panel-title">🏀 Arena Mini-Game: Court Clutch</div>
-                <div class="game-screen" id="bball-screen">
-                    <div class="target-hoop" id="hoop">🗑️</div>
-                    <div class="projectile" id="ball">🏀</div>
-                </div>
-            </div>
-            <button class="game-btn" onclick="shootBall()">Shoot The Rock!</button>
+        <!-- PANEL 2: CHARACTER DOSSIER -->
+        <div class="panel stat-panel">
+            <div class="comic-title">THE PROFILE</div>
+            <p style="font-size: 1.2rem; line-height: 1.4; color: #000;">
+                <strong>NAME:</strong> Toyesh / TOTO<br><br>
+                <strong>CLASS:</strong> Academic Genius + Dual-Sport Threat<br><br>
+                <strong>PASSIVE ABILITY:</strong> Infuses 100% Aura into any room. Anti-Boredom field permanently active.
+            </p>
         </div>
 
-        <!-- Center Column: Football Goal Game -->
-        <div class="panel arena-panel">
-            <div>
-                <div class="panel-title">⚽ Arena Mini-Game: Pitch Striker</div>
-                <div class="game-screen" id="fball-screen">
-                    <div class="target-hoop" id="goal">🥅</div>
-                    <div class="projectile" id="foot-ball">⚽</div>
-                </div>
-            </div>
-            <button class="game-btn" style="background:var(--green); box-shadow:0 4px 0 #23cc0d;" onclick="kickGoal()">Strike the Volley!</button>
+        <!-- PANEL 3: THE ACTION ARCADE -->
+        <div class="panel game-panel">
+            <div class="comic-title" style="background: var(--orange);">BOREDOM SHIELD ACTIVE</div>
+            <p style="font-size: 0.9rem; margin-bottom: 10px; font-family: sans-serif;">Move your cursor/finger over the canvas. Deflect incoming boredom blocks away from Toto's shield!</p>
+            <canvas id="boredom-canvas"></canvas>
+            <div style="text-align: center; margin-top: 5px;">Score: <span id="game-score" style="color: var(--yellow); font-size: 1.5rem;">0</span></div>
         </div>
 
-        <!-- Right Column: Aura Multiplier Engine -->
-        <div class="panel aura-panel">
-            <div class="panel-title">✨ Aura Reactor</div>
-            <p style="font-size: 0.8rem; color: #64748b;">Tap to channel infinite hype vectors</p>
-            <div class="big-counter" id="score-display">10,000</div>
-            <button class="game-btn hype-btn" onclick="boostAura()">CHARGE AURA</button>
-        </div>
-
-        <!-- Bottom Row: Soundboard Matrix -->
+        <!-- PANEL 4: THE SOUNDWAVE MATRICES -->
         <div class="panel soundboard-panel">
-            <div class="panel-title">🔊 Toto Vibe Generator (Click to broadcast)</div>
-            <div class="grid-buttons">
-                <button class="sound-btn" onclick="speak('Warning! Toto has entered the court. Unstoppable mode activated.')">🚨 Entry Announcement</button>
-                <button class="sound-btn" onclick="speak('Happy Birthday to Toto, the absolute legend of sports and studies!')">🎉 Birthday Proclamation</button>
-                <button class="sound-btn" onclick="speak('Boom! Another three-pointer from the baseline by the one and only!')">🏀 Basketball Hype</button>
-                <button class="sound-btn" onclick="speak('He shoots, he scores! What an incredible goal!')">⚽ Football Hype</button>
+            <div class="comic-title" style="background: #000; color: #fff;">HYPER-SOUNDBOARD</div>
+            <p style="color: #555; margin-bottom: 15px; font-family: sans-serif;">Trigger real-time vocalized sports updates celebrating Toto's birthday plays:</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                <button class="pop-btn" style="background: var(--cyan); color: #000;" onclick="speakAction('Boom! Toto hits a clutch three pointer at the buzzer! The crowd goes wild!')">🏀 Baseline Basket</button>
+                <button class="sound-btn pop-btn" style="background: var(--yellow); color: #000;" onclick="speakAction('Unbelievable! Toto strikes it clean into top bins from thirty yards out!')">⚽ Half-Volley Goal</button>
+                <button class="pop-btn" onclick="speakAction('Warning. Toto is approaching. Aura levels are completely breaking the grid.')">⚡ Aura Breakdown</button>
+                <button class="pop-btn" style="background: #000; color: #fff;" onclick="speakAction('Happy Birthday Toto! You are an absolute legend!')">🎂 Birthday Blast</button>
+            </div>
+
+            <div class="bubble-border">
+                <div class="bubble" id="subtitle-box">Click a sound button above to generate a comic commentary live stream!</div>
             </div>
         </div>
+
     </div>
 
     <script>
-        // Aura counter matrix
-        let score = 10000;
-        function boostAura() {
-            score += Math.floor(Math.random() * 5000) + 2500;
-            document.getElementById('score-display').innerText = score.toLocaleString();
-            triggerFx();
-        }
-
-        // Voice Synthesizer Soundboard
-        function speak(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.pitch = 1.1;
-                utterance.rate = 1.0;
-                window.speechSynthesis.speak(utterance);
+        // Interactive Dynamic Background Aura Tracker
+        function multiplyAura(e) {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            document.body.style.setProperty('--aura-x', `${x}%`);
+            document.body.style.setProperty('--aura-y', `${y}%`);
+            
+            // Randomly flash bright colors to background
+            const randomColor = ['#7209b7', '#f72585', '#4cc9f0', '#3a0ca3'][Math.floor(Math.random() * 4)];
+            document.body.style.background = `radial-gradient(circle at ${x}% ${y}%, ${randomColor} 0%, var(--bg) 80%)`;
+            
+            if('speechSynthesis' in window) {
+                let cheer = new SpeechSynthesisUtterance("Aura level up!");
+                cheer.pitch = 1.5;
+                cheer.rate = 1.2;
+                window.speechSynthesis.speak(cheer);
             }
         }
 
-        // Interactive Basketball Mechanic
-        let isShooting = false;
-        function shootBall() {
-            if (isShooting) return;
-            isShooting = true;
-            const ball = document.getElementById('ball');
-            const hoop = document.getElementById('hoop');
-            
-            // Kinetic flight animation paths
-            ball.style.transform = 'translate(220px, -120px) scale(0.7)';
-            
-            setTimeout(() => {
-                hoop.style.transform = 'scale(1.3) rotate(10deg)';
-                speak("Swish!");
-                boostAura();
-            }, 500);
-
-            setTimeout(() => {
-                hoop.style.transform = 'scale(1) rotate(0deg)';
-                ball.style.transform = 'translate(0, 0) scale(1)';
-                isShooting = false;
-            }, 1000);
+        // Live Voice Text engine with graphic dialogue generation
+        function speakAction(phrase) {
+            document.getElementById('subtitle-box').innerText = phrase;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const textEngine = new SpeechSynthesisUtterance(phrase);
+                textEngine.pitch = 1.1;
+                textEngine.rate = 1.0;
+                window.speechSynthesis.speak(textEngine);
+            }
         }
 
-        // Interactive Football Mechanic
-        let isKicking = false;
-        function kickGoal() {
-            if (isKicking) return;
-            isKicking = true;
-            const ball = document.getElementById('foot-ball');
-            const goal = document.getElementById('goal');
-            
-            ball.style.transform = 'translate(200px, -110px) rotate(360deg) scale(0.6)';
-            
-            setTimeout(() => {
-                goal.style.transform = 'scale(1.2) translate(5px, -5px)';
-                speak("Top bins!");
-                boostAura();
-            }, 500);
-
-            setTimeout(() => {
-                goal.style.transform = 'scale(1)';
-                ball.style.transform = 'translate(0, 0) rotate(0deg) scale(1)';
-                isKicking = false;
-            }, 1000);
-        }
-
-        // Kinetic Canvas Spark Engine
-        const canvas = document.getElementById('fx-canvas');
+        // Action Canvas Game: Deflect the Boredom Elements
+        const canvas = document.getElementById('boredom-canvas');
         const ctx = canvas.getContext('2d');
-        let sparks = [];
+        let score = 0;
+        let blocks = [];
+        let mouseX = 100;
+        let mouseY = 100;
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth - 40;
+            canvas.height = 230;
         }
-        window.addEventListener('resize', resize);
-        resize();
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        function triggerFx() {
-            for(let i=0; i<30; i++) {
-                sparks.push({
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.touches[0].clientX - rect.left;
+            mouseY = e.touches[0].clientY - rect.top;
+        });
+
+        function spawnBlock() {
+            if(blocks.length < 10) {
+                blocks.push({
                     x: Math.random() * canvas.width,
-                    y: canvas.height + 20,
-                    vx: Math.random() * 6 - 3,
-                    vy: Math.random() * -15 - 5,
-                    size: Math.random() * 5 + 3,
-                    color: ['#ff6b00', '#00e5ff', '#39ff14'][Math.floor(Math.random()*3)]
+                    y: 0,
+                    size: Math.random() * 20 + 15,
+                    speed: Math.random() * 2 + 2,
+                    text: ["BORING", "STUDY DRAG", "TIRED"][Math.floor(Math.random()*3)]
                 });
             }
         }
+        setInterval(spawnBlock, 800);
 
-        function loop() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            sparks.forEach((s, idx) => {
-                s.x += s.vx;
-                s.y += s.vy;
-                s.vy += 0.3; // Gravity pull
-                ctx.fillStyle = s.color;
-                ctx.fillRect(s.x, s.y, s.size, s.size);
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Shield (Toto Cursor)
+            ctx.fillStyle = '#ff6b00';
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 25, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = '12px Impact';
+            ctx.fillText('TOTO', mouseX - 12, mouseY + 4);
+
+            blocks.forEach((b, index) => {
+                b.y += b.speed;
+
+                // Box Drawing
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(b.x, b.y, b.size * 2, b.size);
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(b.x, b.y, b.size * 2, b.size);
                 
-                if(s.y > canvas.height + 50) sparks.splice(idx, 1);
+                ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
+                ctx.fillText(b.text, b.x + 5, b.y + 15);
+
+                // Check Proximity Deflection
+                let dist = Math.hypot(b.x - mouseX, b.y - mouseY);
+                if(dist < 40) {
+                    blocks.splice(index, 1);
+                    score += 100;
+                    document.getElementById('game-score').innerText = score;
+                }
+
+                // Reset past border
+                if(b.y > canvas.height) {
+                    blocks.splice(index, 1);
+                }
             });
-            requestAnimationFrame(loop);
+
+            requestAnimationFrame(updateGame);
         }
-        loop();
+        updateGame();
     </script>
 </body>
 </html>
